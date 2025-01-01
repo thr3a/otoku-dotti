@@ -7,8 +7,6 @@ type ItemFormProps = {
   capacityB: number;
   countA: number;
   countB: number;
-  tankaA: number;
-  tankaB: number;
 };
 
 // You can give context variables any name

@@ -1,10 +1,5 @@
 import { Box, Center, Text } from '@mantine/core';
 
-type ResultProps = {
-  diff: number;
-  tanka: number;
-};
-
 const Tokumark = () => {
   return (
     <Box
@@ -34,15 +29,20 @@ const Tokumark = () => {
   );
 };
 
-export const WinResult: React.FC<ResultProps> = ({ diff, tanka }) => {
+export const Tanka = ({ tanka }: { tanka: number }) => {
+  return (
+    <Center fz={'24px'}>
+      @
+      <Text component='span' fw='bold'>
+        {tanka}
+      </Text>
+    </Center>
+  );
+};
+
+export const WinResult = ({ diff }: { diff: number }) => {
   return (
     <Box>
-      <Center fz={'24px'}>
-        @
-        <Text component='span' fw='bold'>
-          {tanka}
-        </Text>
-      </Center>
       <Center>
         <Tokumark />
       </Center>
@@ -59,12 +59,11 @@ export const WinResult: React.FC<ResultProps> = ({ diff, tanka }) => {
   );
 };
 
-export const LoseResult: React.FC<ResultProps> = ({ tanka }) => {
+export const SameResult = () => {
   return (
     <Center fz={'24px'}>
-      @
       <Text component='span' fw='bold'>
-        {tanka}
+        同じ
       </Text>
     </Center>
   );
