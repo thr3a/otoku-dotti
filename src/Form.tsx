@@ -55,8 +55,6 @@ export const Form = (): JSX.Element => {
     <ItemFormProvider form={form}>
       <Box
         component='form'
-        maw={400}
-        mx='auto'
         onSubmit={form.onSubmit(() => {
           handleSubmit();
         })}
@@ -70,7 +68,7 @@ export const Form = (): JSX.Element => {
           </Grid.Col>
         </Grid>
         <Group>
-          <Button type='submit'>計算!</Button>
+          <Button type='submit'>計算！</Button>
           <Button type='button' color='gray' onClick={handleReset}>
             クリア
           </Button>

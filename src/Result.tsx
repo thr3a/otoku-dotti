@@ -51,7 +51,7 @@ export const WinResult: React.FC<ResultProps> = ({ diff, tanka }) => {
   );
 };
 
-export const LoseResult: React.FC<ResultProps> = ({ diff, tanka }) => {
+export const LoseResult: React.FC<ResultProps> = ({ tanka }) => {
   return (
     <Center style={{ fontSize: '24px' }}>
       @
