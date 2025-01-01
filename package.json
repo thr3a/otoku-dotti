@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite --host",
     "build": "tsc && vite build",
-    "lint": "biome check --write ./src",
+    "lint": "biome check  --fix --unsafe ./src",
     "preview": "vite preview",
     "serve": "python -m http.server -d dist"
   },

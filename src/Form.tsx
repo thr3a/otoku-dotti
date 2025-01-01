@@ -53,9 +53,8 @@ export const Form = (): JSX.Element => {
     );
     if (betterItem() === 'A') {
       return ceilDecimal(form.values.tankaB - form.values.tankaA, 1) * count;
-    } else {
-      return ceilDecimal(form.values.tankaA - form.values.tankaB, 1) * count;
     }
+    return ceilDecimal(form.values.tankaA - form.values.tankaB, 1) * count;
   };
 
   const betterItem = (): string => {
@@ -64,9 +63,8 @@ export const Form = (): JSX.Element => {
     }
     if (form.values.tankaA < form.values.tankaB) {
       return 'A';
-    } else {
-      return 'B';
     }
+    return 'B';
   };
 
   return (
