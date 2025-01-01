@@ -8,7 +8,7 @@ interface Product {
   packs?: number; // パック数（任意）
 }
 
-class ProductComparer {
+export class ProductComparer {
   productA: Product;
   productB: Product;
 
@@ -47,9 +47,18 @@ class ProductComparer {
   calcPriceDifference(): number {
     const unitPriceA = this.calcUnitPriceA();
     const unitPriceB = this.calcUnitPriceB();
+    const totalQuantityA = this.productA.packs ? this.productA.quantity * this.productA.packs : this.productA.quantity;
+    const totalQuantityB = this.productB.packs ? this.productB.quantity * this.productB.packs : this.productB.quantity;
 
-    const difference = Math.abs(unitPriceA - unitPriceB);
-    return ceilDecimal(difference, 1);
+    if (unitPriceA === unitPriceB) {
+      return 0;
+    }
+
+    if (unitPriceA < unitPriceB) {
+      return ceilDecimal(unitPriceB * totalQuantityA - this.productA.price, 1);
+    }
+
+    return ceilDecimal(unitPriceA * totalQuantityB - this.productB.price, 1);
   }
 }
 

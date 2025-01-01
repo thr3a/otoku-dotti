@@ -8,7 +8,8 @@
     "build": "tsc && vite build",
     "lint": "biome check  --fix --unsafe ./src",
     "preview": "vite preview",
-    "serve": "python -m http.server -d dist"
+    "serve": "python -m http.server -d dist",
+    "test": "vitest"
   },
   "dependencies": {
     "@mantine/core": "7.15.2",
