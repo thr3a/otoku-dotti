@@ -44,7 +44,7 @@ export class ProductComparer {
   }
 
   // どれくらい安いかを算出する
-  calcPriceDifference(): number {
+  calcPriceDiff(): number {
     const unitPriceA = this.calcUnitPriceA();
     const unitPriceB = this.calcUnitPriceB();
     const totalQuantityA = this.productA.packs ? this.productA.quantity * this.productA.packs : this.productA.quantity;

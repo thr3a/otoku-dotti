@@ -52,6 +52,6 @@ describe('ProductComparer', () => {
     const productA = { price: 300, quantity: 300 };
     const productB = { price: 550, quantity: 1000 };
     const comparer = new ProductComparer(productA, productB);
-    expect(comparer.calcPriceDifference()).toBe(450);
+    expect(comparer.calcPriceDiff()).toBe(450);
   });
 });

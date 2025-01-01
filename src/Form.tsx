@@ -76,18 +76,18 @@ export const Form = (): JSX.Element => {
         <Grid>
           <Grid.Col span={6}>
             {comparer && comparer.determineCheaperProduct() === 'A' && (
-              <WinResult diff={comparer.calcPriceDifference()} tanka={form.values.tankaA} />
+              <WinResult diff={comparer.calcPriceDiff()} tanka={form.values.tankaA} />
             )}
             {comparer && comparer.determineCheaperProduct() === 'B' && (
-              <LoseResult diff={comparer.calcPriceDifference()} tanka={form.values.tankaA} />
+              <LoseResult diff={comparer.calcPriceDiff()} tanka={form.values.tankaA} />
             )}
           </Grid.Col>
           <Grid.Col span={6}>
             {comparer && comparer.determineCheaperProduct() === 'B' && (
-              <WinResult diff={comparer.calcPriceDifference()} tanka={form.values.tankaB} />
+              <WinResult diff={comparer.calcPriceDiff()} tanka={form.values.tankaB} />
             )}
             {comparer && comparer.determineCheaperProduct() === 'A' && (
-              <LoseResult diff={comparer.calcPriceDifference()} tanka={form.values.tankaB} />
+              <LoseResult diff={comparer.calcPriceDiff()} tanka={form.values.tankaB} />
             )}
           </Grid.Col>
         </Grid>
