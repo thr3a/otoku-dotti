@@ -32,7 +32,7 @@ export const Item: React.FC<ItemProps> = ({ index }) => {
         label='パック数(任意)'
         inputMode='numeric'
         {...allowBlankInputProps(form, `count${index}`)}
-        styles={(theme) => ({
+        styles={() => ({
           label: {
             fontWeight: 'normal'
           }

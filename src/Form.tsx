@@ -1,23 +1,27 @@
 import { Box, Button, Grid, Group } from '@mantine/core';
 import { isNotEmpty } from '@mantine/form';
-import { ceilDecimal } from 'decimal-utils';
+import { useState } from 'react';
 import { Item } from './Item';
 import { ItemFormProvider, useItemForm } from './ItemContext';
 import { LoseResult, WinResult } from './Result';
+import { ProductComparer } from './productComparer';
 
 export const Form = (): JSX.Element => {
+  const [comparer, setComparer] = useState<ProductComparer | null>(null);
   const form = useItemForm({
     initialValues: {
-      priceA: 300,
-      priceB: 550,
-      capacityA: 300,
-      capacityB: 1000,
+      priceA: 2483,
+      priceB: 4744,
+      capacityA: 8,
+      capacityB: 8,
+      countA: 4,
+      countB: 8,
       // priceA: 0,
       // priceB: 0,
       // capacityA: 0,
       // capacityB: 0,
-      countA: 0,
-      countB: 0,
+      // countA: 0,
+      // countB: 0,
       tankaA: 0,
       tankaB: 0
     },
@@ -31,40 +35,20 @@ export const Form = (): JSX.Element => {
   });
 
   const handleSubmit = (): void => {
-    console.log(form.values);
-    const tankaA = form.values.priceA / form.values.capacityA / Math.max(form.values.countA, 1);
-    const tankaB = form.values.priceB / form.values.capacityB / Math.max(form.values.countB, 1);
-
+    const productA = { price: form.values.priceA, quantity: form.values.capacityA, packs: form.values.countA };
+    const productB = { price: form.values.priceB, quantity: form.values.capacityB, packs: form.values.countB };
+    const newComparer = new ProductComparer(productA, productB);
+    setComparer(newComparer);
     form.setValues({
-      tankaA: ceilDecimal(tankaA, 1),
-      tankaB: ceilDecimal(tankaB, 1)
+      tankaA: newComparer.calcUnitPriceA(),
+      tankaB: newComparer.calcUnitPriceB()
     });
   };
 
   const handleReset = (): void => {
     form.reset();
     form.clearErrors();
-  };
-
-  const diff = (): number => {
-    const count = Math.max(
-      form.values.capacityA * Math.max(form.values.countA, 1),
-      form.values.capacityB * Math.max(form.values.countB, 1)
-    );
-    if (betterItem() === 'A') {
-      return ceilDecimal(form.values.tankaB - form.values.tankaA, 1) * count;
-    }
-    return ceilDecimal(form.values.tankaA - form.values.tankaB, 1) * count;
-  };
-
-  const betterItem = (): string => {
-    if (form.values.tankaA === 0 && form.values.tankaB === 0) {
-      return '';
-    }
-    if (form.values.tankaA < form.values.tankaB) {
-      return 'A';
-    }
-    return 'B';
+    setComparer(null);
   };
 
   return (
@@ -93,12 +77,20 @@ export const Form = (): JSX.Element => {
         </Group>
         <Grid>
           <Grid.Col span={6}>
-            {betterItem() === 'A' && <WinResult diff={diff()} tanka={form.values.tankaA} />}
-            {betterItem() === 'B' && <LoseResult diff={diff()} tanka={form.values.tankaA} />}
+            {comparer && comparer.determineCheaperProduct() === 'A' && (
+              <WinResult diff={comparer.calcPriceDifference()} tanka={form.values.tankaA} />
+            )}
+            {comparer && comparer.determineCheaperProduct() === 'B' && (
+              <LoseResult diff={comparer.calcPriceDifference()} tanka={form.values.tankaA} />
+            )}
           </Grid.Col>
           <Grid.Col span={6}>
-            {betterItem() === 'B' && <WinResult diff={diff()} tanka={form.values.tankaB} />}
-            {betterItem() === 'A' && <LoseResult diff={diff()} tanka={form.values.tankaB} />}
+            {comparer && comparer.determineCheaperProduct() === 'B' && (
+              <WinResult diff={comparer.calcPriceDifference()} tanka={form.values.tankaB} />
+            )}
+            {comparer && comparer.determineCheaperProduct() === 'A' && (
+              <LoseResult diff={comparer.calcPriceDifference()} tanka={form.values.tankaB} />
+            )}
           </Grid.Col>
         </Grid>
       </Box>

@@ -2,7 +2,7 @@ const ceilDecimal = (value: number, n: number): number => {
   return Math.ceil(value * 10 ** n) / 10 ** n;
 };
 
-interface Product {
+export interface Product {
   price: number; // 価格
   quantity: number; // 量
   packs?: number; // パック数（任意）
@@ -61,20 +61,3 @@ export class ProductComparer {
     return ceilDecimal(unitPriceA * totalQuantityB - this.productB.price, 1);
   }
 }
-
-// 例
-const productA: Product = {
-  price: 300,
-  quantity: 300
-};
-
-const productB: Product = {
-  price: 550,
-  quantity: 1000
-};
-
-const comparer = new ProductComparer(productA, productB);
-
-console.log(comparer.determineCheaperProduct());
-console.log(comparer.calcUnitPriceA(), comparer.calcUnitPriceB());
-console.log(comparer.calcPriceDifference());
