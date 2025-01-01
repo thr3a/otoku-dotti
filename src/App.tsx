@@ -1,5 +1,5 @@
 import '@mantine/core/styles.css';
-import { Box, Container, MantineProvider, Title } from '@mantine/core';
+import { Container, MantineProvider, Title } from '@mantine/core';
 import { Form } from './Form';
 import { theme } from './theme';
 
