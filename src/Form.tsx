@@ -67,7 +67,7 @@ export const Form = (): JSX.Element => {
             <Item index='B' />
           </Grid.Col>
         </Grid>
-        <Group>
+        <Group mt='sm' mb={'sm'}>
           <Button type='submit'>計算！</Button>
           <Button type='button' color='gray' onClick={handleReset}>
             クリア
