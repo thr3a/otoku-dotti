@@ -1,3 +1,7 @@
+# どっちお得くん
+
+https://otoku.turai.work/
+
 # ts実行
 
 ```bash
